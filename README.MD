@@ -1,4 +1,8 @@
 # LogCollector API
+## Installation
+1) clone repository
+2) `composer install`
+3) Start server `symfony server:start`
 
 ## Query examples
 

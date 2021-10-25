@@ -30,7 +30,7 @@ class ApiController extends AbstractController
     {
         $client = ClientBuilder::create()->build();
         $response = $client->cat()->indices(array('index' => 'filebeat*'));
-        return $this->json($response, 200);
+        return $this->json($response[0]['index'], 200);
     }
 
     /**

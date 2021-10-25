@@ -49,7 +49,9 @@ class ElasticService
 
     protected function getFilebeatIndex()
     {
+        if(isset ($_ENV['INDEX']))
+            return $_ENV['INDEX'];
         $response = $this->client->cat()->indices(array('index' => 'filebeat*'));
-        return $response[0]['index'] ?? null;;
+        return $response[0]['index'] ?? null;
     }
 }
