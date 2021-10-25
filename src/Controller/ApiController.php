@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Helper\ElasticQueryBuilder\ElasticQueryBuilder;
 
+use App\Service\AuthService;
 use App\Service\ElasticService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,13 +37,16 @@ class ApiController extends AbstractController
     public function searchData(
         Request $request,
         ElasticService $elasticSearch,
+        AuthService $authService,
         ValidatorInterface $validator
 
     )
     {
 
 
-
+        if(!$authService->checkLogin($request)){
+            return $this->getError("Auth failed", 401);
+        }
         $page = $request->get('page', 1);
         $perPage = $request->get('perPage', 10);
         $search = $request->get('search');

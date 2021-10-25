@@ -18,6 +18,8 @@ sudo pecl install PAM
 curl --request POST \
   --url http://10.211.55.3:8000/api/search \
   --header 'Content-Type: application/json' \
+  --header 'php-auth-pw: password' \
+  --header 'php-auth-user: user' \
   --data '{
 	"page": 2,
 	"perPage": "100",
@@ -31,6 +33,8 @@ curl --request POST \
 curl --request POST \
   --url http://10.211.55.3:8000/api/search \
   --header 'Content-Type: application/json' \
+  --header 'php-auth-pw: password' \
+  --header 'php-auth-user: user' \
   --data '{
 	"page": 1,
 	"perPage": "100",
@@ -44,10 +48,12 @@ curl --request POST \
 curl --request POST \
   --url http://10.211.55.3:8000/api/search \
   --header 'Content-Type: application/json' \
+  --header 'php-auth-pw: password' \
+  --header 'php-auth-user: user' \
   --data '{
 	"page": 1,
 	"perPage": "10",
-	"search": ["/([0-9]{1,3}.){3}2/", "passwd"],
+	"search": ["/([0-9]{1,3}.){3}2/", "nginx"],
 	"timestamp": [
 		{
 			"from":"2021/10/11"
