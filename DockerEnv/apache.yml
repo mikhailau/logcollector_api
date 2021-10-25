@@ -1,0 +1,7 @@
+- module: apache
+  access:
+    enabled: true
+    var.paths: ["/logs/apache2/access.log*"]
+  error:
+    enabled: true
+    var.paths: ["/logs/apache2/error.log*"]

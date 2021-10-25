@@ -1,0 +1,30 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+filebeat.inputs:
+  - type: log #Change value to true to activate the input configuration
+    enabled: true
+    paths:
+      - “/logs/apache2/*”
+      - “/logs/nginx/*”
+
+processors:
+  - timestamp:
+      field: message
+      layouts:
+        - 'Sep 20 21:09:31'
+        - '10/Oct/2021:18:58:29 +0300'
+        - 'Sun Oct 10 18:58:26.659660 2021'
+
+#filebeat.autodiscover:
+#  providers:
+#    - type: docker
+#      hints.enabled: true
+  - add_cloud_metadata: ~
+
+output.elasticsearch:
+  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+  username: '${ELASTICSEARCH_USERNAME:}'
+  password: '${ELASTICSEARCH_PASSWORD:}'

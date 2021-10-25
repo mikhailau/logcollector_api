@@ -1,5 +1,29 @@
 # LogCollector API
 ## Installation
+
+
+### Elastic
+```
+ sudo docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+```
+
+### Filebeat
+1. ```cd DockerEnv```
+2. change *IP_OF_ELASTIC_CONTAINER_OR_HOST_IP*  to host IP
+3. Run command
+```
+sudo docker run --name=filebeat \
+  --user=root \
+  --volume="$(pwd)/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro" \
+  --volume="/var/lib/docker/containers:/var/lib/docker/containers:ro" \
+  --volume="/var/run/docker.sock:/var/run/docker.sock:ro" \
+  --volume="/var/log:/logs:ro" \
+  --volume "$(pwd)/apache.yml:/usr/share/filebeat/modules.d/apache.yml" \
+  --volume "$(pwd)/nginx.yml:/usr/share/filebeat/modules.d/nginx.yml" \
+  docker.elastic.co/beats/filebeat:7.14.1 filebeat -e -strict.perms=false \
+  -E output.elasticsearch.hosts=["IP_OF_ELASTIC_CONTAINER_OR_HOST:9200"]
+```
+
 1) Install dependencies
 ```
 sudo apt-get install php7.4-dev
