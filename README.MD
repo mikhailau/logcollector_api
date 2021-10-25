@@ -1,9 +1,16 @@
 # LogCollector API
 ## Installation
-1) clone repository
-2) `composer install`
-3) Start server `symfony server:start`
+1) Install dependencies
+```
+sudo apt-get install php7.4-dev
+sudo apt-get install libpam0g-dev
+sudo pecl install PAM
 
+#add You should add "extension=pam.so" to php.ini(/etc/php/7.4/fpm/php.ini )
+```
+2) clone repository
+3) `composer install`
+4) Start server `symfony server:start`
 ## Query examples
 
 ### Simple query with pagination

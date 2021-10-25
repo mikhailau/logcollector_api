@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-//use Knp\Component\Pager\PaginatorInterface;
 use App\Helper\ElasticQueryBuilder\Interfaces\ElasticQueryBuilderInterface;
 use Elasticsearch\ClientBuilder;
 
@@ -40,9 +39,6 @@ class ElasticService
 
     protected function getQuery($query)
     {
-        // Query could be a simple query string or DSL syntax based array
-        //$query = $this->getArrayQuery($query);
-
         return $query;
     }
 

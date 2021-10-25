@@ -7,11 +7,8 @@ use App\Helper\ElasticQueryBuilder\ElasticQueryBuilder;
 
 use App\Service\ElasticService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\Routing\Annotation\Route;
-
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,9 +42,7 @@ class ApiController extends AbstractController
     {
 
 
-        $emailConstraint = new Assert\Email();
-        // все "опции" ограничения могут быть установлены таким образом
-        $emailConstraint->message = 'Invalid email address';
+
         $page = $request->get('page', 1);
         $perPage = $request->get('perPage', 10);
         $search = $request->get('search');
@@ -67,6 +62,7 @@ class ApiController extends AbstractController
         if ($validationResult) {
             return $validationResult;
         }
+
         $excludeCharacters = ['!', '^', '[', ']', '{', '}', '.', '/', '(', ')', '-', '*', '+'];
         if (is_array($search)) {
             array_walk($search, function (&$item) use ($excludeCharacters) {
@@ -96,6 +92,9 @@ class ApiController extends AbstractController
         } catch (\Exception $e) {
             return $this->getError($e->getMessage());
         }
+
+
+
 
         $list = $elasticSearch->getPaginatedList($query);
 
