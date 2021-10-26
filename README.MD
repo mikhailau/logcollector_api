@@ -1,6 +1,8 @@
 # LogCollector API
 ## Installation
 
+### install docker
+https://docs.docker.com/engine/install/ubuntu/
 
 ### Elastic
 ```
